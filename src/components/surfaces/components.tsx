@@ -1,5 +1,7 @@
 "use client";
 
+import { useCallback, useSyncExternalStore } from "react";
+
 import { Canvas, Hero } from "../workbench/chrome";
 import { Section } from "../workbench/shell";
 import styles from "../workbench/workbench.module.css";
@@ -63,33 +65,83 @@ const SECTIONS = [
   },
 ] as const;
 
-export function ComponentsSurface() {
-  return (
-    <Canvas>
-      <Hero
-        eyebrow="EVERY HALF · COMPONENTS"
-        title="Every specimen here is the component, not a picture of it."
-        lead={
-          <>
-            Every specimen imports from <code>src/components/ui</code> and names the export it comes
-            from. Several can be operated, so the documentation cannot go stale.
-          </>
-        }
-      />
+const ALL = "all";
 
-      <nav className={styles.sectionNav} aria-label="Sections">
-        {SECTIONS.map((section) => (
-          <a key={section.id} className={styles.sectionNavLink} href={`#${section.id}`}>
-            {section.index} · {section.title}
-          </a>
-        ))}
+/**
+ * The location hash, as an external store.
+ *
+ * `useSyncExternalStore` rather than an effect: the hash is state that lives
+ * outside React, and reading it into `useState` on mount would both trip
+ * set-state-in-effect and render the wrong section for one frame.
+ */
+function subscribe(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  return () => window.removeEventListener("hashchange", onChange);
+}
+
+function useSectionFromHash() {
+  return useSyncExternalStore(
+    subscribe,
+    () => window.location.hash.slice(1),
+    () => "" // server render: fall through to the default below
+  );
+}
+
+export function ComponentsSurface() {
+  const hash = useSectionFromHash();
+  const active = hash === ALL || SECTIONS.some((s) => s.id === hash) ? hash : SECTIONS[0].id;
+  const showing = active === ALL ? SECTIONS : SECTIONS.filter((s) => s.id === active);
+
+  const select = useCallback((id: string) => {
+    window.location.hash = id;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  return (
+    <>
+      <nav className={styles.sectionBar} aria-label="Component sections">
+        <div className={styles.sectionBarInner}>
+          {SECTIONS.map((section) => (
+            <button
+              key={section.id}
+              type="button"
+              className={active === section.id ? styles.sectionTabActive : styles.sectionTab}
+              aria-current={active === section.id ? "page" : undefined}
+              onClick={() => select(section.id)}
+            >
+              <span className={styles.sectionTabIndex}>{section.index}</span>
+              {section.title}
+            </button>
+          ))}
+          <button
+            type="button"
+            className={active === ALL ? styles.sectionTabActive : styles.sectionTab}
+            aria-current={active === ALL ? "page" : undefined}
+            onClick={() => select(ALL)}
+          >
+            All
+          </button>
+        </div>
       </nav>
 
-      {SECTIONS.map(({ id, index, title, copy, Body }) => (
-        <Section key={id} id={id} index={index} title={title} copy={copy}>
-          <Body />
-        </Section>
-      ))}
-    </Canvas>
+      <Canvas>
+        <Hero
+          eyebrow="EVERY HALF · COMPONENTS"
+          title="Every specimen here is the component, not a picture of it."
+          lead={
+            <>
+              Every specimen imports from <code>src/components/ui</code> and names the export it
+              comes from. Several can be operated, so the documentation cannot go stale.
+            </>
+          }
+        />
+
+        {showing.map(({ id, index, title, copy, Body }) => (
+          <Section key={id} id={id} index={index} title={title} copy={copy}>
+            <Body />
+          </Section>
+        ))}
+      </Canvas>
+    </>
   );
 }

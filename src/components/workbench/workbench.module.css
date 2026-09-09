@@ -107,6 +107,68 @@
   background: var(--eh-bg-subtle);
 }
 
+/* ===== Section bar ======================================================= */
+
+/* Sticks directly under the top bar. The offset comes from a custom property
+   the TopBar measures itself into, because its height changes when it wraps —
+   a hardcoded offset would leave a gap or an overlap at some width. */
+.sectionBar {
+  position: sticky;
+  top: var(--eh-topbar-h, 61px);
+  z-index: 15;
+  border-bottom: 1px solid var(--eh-border-default);
+  background: var(--eh-bg-canvas);
+}
+
+.sectionBarInner {
+  display: flex;
+  gap: var(--eh-space-2xs);
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: var(--eh-space-xs) var(--eh-space-xl);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sectionBarInner::-webkit-scrollbar {
+  display: none;
+}
+
+.sectionTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 var(--eh-space-sm);
+  flex: none;
+  border: 0;
+  border-radius: var(--eh-radius-full);
+  background: none;
+  color: var(--eh-text-secondary);
+  font: var(--eh-text-caption);
+  font-weight: 600;
+  letter-spacing: normal;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.sectionTab:hover {
+  background: var(--eh-bg-subtle);
+  color: var(--eh-text-primary);
+}
+
+.sectionTabActive {
+  composes: sectionTab;
+  background: var(--eh-tint-brand);
+  color: var(--eh-on-brand-tint);
+}
+
+.sectionTabIndex {
+  font-family: var(--eh-font-mono);
+  font-size: 10px;
+  opacity: 0.65;
+}
+
 /* ===== Canvas ============================================================ */
 
 .canvas {
@@ -160,35 +222,10 @@
   font-size: 0.86em;
 }
 
-/* The jump-links under the hero. Padded to clear the 24px minimum target size:
-   they are a standalone nav row, not links inline in a sentence. */
-.sectionNav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--eh-space-2xs) var(--eh-space-sm);
-  margin-top: calc(var(--eh-space-lg) * -1);
-}
-
-.sectionNavLink {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 0 var(--eh-space-2xs);
-  border-radius: var(--eh-radius-xs);
-  font: var(--eh-text-caption);
-  font-weight: 600;
-  color: var(--eh-text-brand);
-  text-decoration: none;
-}
-
-.sectionNavLink:hover {
-  background: var(--eh-tint-brand);
-}
-
 /* ===== Section / Group / Spec ============================================ */
 
 .section {
-  margin-top: 64px;
+  margin-top: var(--eh-space-2xl);
   scroll-margin-top: var(--eh-space-xl);
 }
 

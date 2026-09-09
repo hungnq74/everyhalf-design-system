@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 import { Moon, Sun } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -17,9 +18,27 @@ export const SURFACES = [
 export function TopBar() {
   const pathname = usePathname();
   const { dark, toggle } = useDesignSystemTheme();
+  const ref = useRef<HTMLElement>(null);
+
+  /**
+   * Publish the bar's own height so anything sticking below it can offset
+   * correctly. It wraps to two rows on narrow screens, so a fixed offset would
+   * leave a gap at one width and an overlap at another. Writing a CSS property
+   * is a DOM write, not React state.
+   */
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const publish = () =>
+      document.documentElement.style.setProperty("--eh-topbar-h", `${el.offsetHeight}px`);
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <header className={styles.topbar}>
+    <header className={styles.topbar} ref={ref}>
       <div className={styles.topbarInner}>
         <Link className={styles.lockup} href="/foundation">
           <Image
