@@ -2,7 +2,7 @@
 
 import { Coffee, Inbox, Ticket } from "lucide-react";
 
-import { Device } from "../workbench/device";
+import { Viewport } from "../workbench/viewport";
 import { Group, Spec, SpecGrid } from "../workbench/shell";
 import {
   ActionBar,
@@ -126,7 +126,7 @@ export function FeedbackSection() {
       >
         <SpecGrid>
           <Spec label="Bottom sheet" source="Sheet" note="Keeps a grabber: no visible way out traps people." wide>
-            <Device height={420}>
+            <Viewport height={340}>
               <div style={{ flex: 1 }} />
               <Sheet title="Chọn cách nhận hàng">
                 <ChipRow>
@@ -137,14 +137,14 @@ export function FeedbackSection() {
                   <ActionBar>Xác nhận</ActionBar>
                 </div>
               </Sheet>
-            </Device>
+            </Viewport>
           </Spec>
           <Spec label="Destructive confirm" source="ConfirmDialog" wide>
-            <Device height={420}>
+            <Viewport height={340}>
               <ConfirmDialog title="Huỷ đơn hàng?" confirm="Huỷ đơn">
                 Đơn EH_152280_4166 sẽ bị huỷ. Tiền được hoàn trong 24 giờ.
               </ConfirmDialog>
-            </Device>
+            </Viewport>
           </Spec>
         </SpecGrid>
       </Group>

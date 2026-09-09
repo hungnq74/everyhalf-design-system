@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Bell, ChevronRight, Clock, Gift, Settings, Ticket } from "lucide-react";
 
-import { Device } from "../workbench/device";
+import { Viewport } from "../workbench/viewport";
 import { Group, Spec, SpecGrid } from "../workbench/shell";
 import {
   Accordion,
@@ -53,13 +53,13 @@ export function NavigationSection() {
           <Spec
             label="Bottom navigation — in context"
             source="BottomNav"
-            note="Shown in a device: a tab bar only means anything against a bottom edge."
+            note="A tab bar only means anything against a bottom edge."
             wide
           >
-            <Device height={260} label="390pt — an iPhone 14/15.">
+            <Viewport height={170} label="390pt viewport.">
               <div style={{ flex: 1 }} />
               <LiveNav />
-            </Device>
+            </Viewport>
           </Spec>
         </SpecGrid>
       </Group>

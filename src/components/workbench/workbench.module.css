@@ -611,116 +611,28 @@
   color: var(--eh-text-primary);
 }
 
-/* ===== Phone frame ======================================================= */
+/* ===== Viewport ========================================================== */
 
-.deviceRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--eh-space-xl);
-}
-
-/* 390pt — an iPhone 14/15. The reference screenshots are 430pt captures, and
-   at the 320px this started out as every screen was cramped enough to wrap
-   copy that does not wrap on a real device. */
-.device {
-  --device-w: 390px;
-  position: relative;
-  width: var(--device-w);
-  height: 780px;
-  flex: none;
-  padding: 8px;
-  border-radius: 42px;
-  background: var(--eh-neutral-900);
-  box-shadow: 0 24px 60px rgba(35, 31, 32, 0.22);
-}
-
-.deviceScreen {
+/* A phone-width panel, not a phone. No bezel, no notch, no status bar: at
+   documentation height a device frame is a squat box with a notch on it, and
+   the bezel was never the thing being documented. */
+.viewport {
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  border-radius: 34px;
+  width: 390px;
+  flex: none;
+  border: 1px solid var(--eh-border-default);
+  border-radius: var(--eh-radius-md);
   background: var(--eh-bg-canvas);
   overflow: hidden;
 }
 
-.deviceNotch {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  width: 92px;
-  height: 24px;
-  border-radius: var(--eh-radius-full);
-  background: var(--eh-neutral-900);
-  transform: translateX(-50%);
-  z-index: 5;
-}
-
-.statusBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px var(--eh-gutter) 4px;
-  font: var(--eh-text-caption);
-  font-weight: 600;
-  color: var(--eh-text-primary);
-}
-
-.deviceBody {
-  flex: 1;
-  overflow-y: auto;
-  scrollbar-width: thin;
-}
-
-.deviceCaption {
-  margin: var(--eh-space-sm) 0 0;
-  width: var(--device-w, 390px);
+.viewportCaption {
+  margin: var(--eh-space-xs) 0 0;
+  width: 390px;
   font: var(--eh-text-caption);
   color: var(--eh-text-secondary);
-}
-
-/* Bottom tab bar */
-.tabBar {
-  display: flex;
-  border-top: 1px solid var(--eh-border-default);
-  background: var(--eh-bg-surface);
-  padding-bottom: 6px;
-}
-
-.tab {
-  flex: 1;
-  display: grid;
-  justify-items: center;
-  gap: 3px;
-  padding: 8px 0 4px;
-  border: 0;
-  background: none;
-  color: var(--eh-text-secondary);
-  font: var(--eh-text-caption);
-  font-size: 11px;
-  cursor: pointer;
-}
-
-.tabActive {
-  composes: tab;
-  color: var(--eh-eh-purple);
-  font-weight: 600;
-}
-
-.tabBadge {
-  position: absolute;
-  top: -5px;
-  right: -9px;
-  min-width: 17px;
-  height: 17px;
-  padding: 0 4px;
-  border-radius: var(--eh-radius-full);
-  background: var(--eh-danger);
-  color: #fff;
-  font-size: 9.5px;
-  font-weight: 700;
-  line-height: 17px;
-  text-align: center;
 }
 
 /* ===== Flow map ========================================================== */
