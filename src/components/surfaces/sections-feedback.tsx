@@ -125,7 +125,7 @@ export function FeedbackSection() {
         note="Sheets ask for something extra. Dialogs are reserved for destructive confirmation."
       >
         <SpecGrid>
-          <Spec label="Bottom sheet" source="Sheet" note="Keeps a grabber: no visible way out traps people.">
+          <Spec label="Bottom sheet" source="Sheet" note="Keeps a grabber: no visible way out traps people." wide>
             <Device height={420}>
               <div style={{ flex: 1 }} />
               <Sheet title="Chọn cách nhận hàng">
@@ -139,7 +139,7 @@ export function FeedbackSection() {
               </Sheet>
             </Device>
           </Spec>
-          <Spec label="Destructive confirm" source="ConfirmDialog">
+          <Spec label="Destructive confirm" source="ConfirmDialog" wide>
             <Device height={420}>
               <ConfirmDialog title="Huỷ đơn hàng?" confirm="Huỷ đơn">
                 Đơn EH_152280_4166 sẽ bị huỷ. Tiền được hoàn trong 24 giờ.

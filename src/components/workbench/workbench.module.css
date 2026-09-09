@@ -260,6 +260,9 @@
   gap: var(--eh-space-sm);
   padding: var(--eh-space-xl) var(--eh-space-md);
   background: var(--eh-bg-canvas);
+  /* A device frame is a fixed 390pt artifact. If the stage is narrower it must
+     scroll rather than be clipped by the card's overflow:hidden. */
+  overflow-x: auto;
 }
 
 .specStageStretch {

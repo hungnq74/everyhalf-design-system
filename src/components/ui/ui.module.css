@@ -1479,6 +1479,9 @@
 }
 
 .sheetGrabber {
+  /* A span in a block parent: without display:block the size is ignored and the
+     grabber collapses to nothing. */
+  display: block;
   width: 36px;
   height: 4px;
   margin: 0 auto var(--eh-space-md);
