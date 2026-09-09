@@ -297,12 +297,18 @@
 .specGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-auto-rows: auto;
   gap: var(--eh-space-md);
 }
 
+/* Each card spans three subgrid rows — stage, footer, note — so all three line
+   up across the row no matter how long an individual note runs. Without this
+   the footer floated to a different height in every card and the specimens
+   themselves sat at different vertical positions. */
 .spec {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
   border: 1px solid var(--eh-border-default);
   border-radius: var(--eh-radius-md);
   background: var(--eh-bg-surface);
@@ -315,7 +321,6 @@
 }
 
 .specStage {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -331,6 +336,7 @@
   composes: specStage;
   align-items: stretch;
   flex-direction: column;
+  justify-content: center;
 }
 
 .specFoot {
@@ -354,6 +360,7 @@
 }
 
 .specNote {
+  margin: 0;
   padding: 0 var(--eh-space-md) var(--eh-space-md);
   font: var(--eh-text-caption);
   color: var(--eh-text-secondary);

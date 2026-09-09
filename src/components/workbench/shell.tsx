@@ -89,7 +89,9 @@ export function Spec({
         <span className={styles.specLabel}>{label}</span>
         {source ? <code className={styles.specSource}>{source}</code> : null}
       </div>
-      {note ? <p className={styles.specNote}>{note}</p> : null}
+      {/* Always rendered, even when empty: the card is a 3-row subgrid, and a
+          missing row would break alignment with its neighbours. */}
+      <p className={styles.specNote}>{note}</p>
     </article>
   );
 }

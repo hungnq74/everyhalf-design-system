@@ -6,7 +6,7 @@ loyalty and pickup app. Two surfaces:
 | Route | What it is |
 | --- | --- |
 | `/foundation` | Colour with recorded provenance, the Bricolage width axis, spacing, radius, elevation, motion, the mobile-only tokens — plus the whole system as a copyable and downloadable stylesheet |
-| `/components` | The mobile component library: actions, input, navigation, feedback, loyalty, commerce and data display. One section shows at a time via a sticky switcher — `#loyalty`, `#commerce` and so on deep-link, and `#all` shows everything at once |
+| `/components` | The mobile component library: actions, input, navigation, feedback, loyalty, commerce and data display. All sections by default; a sticky switcher narrows to one at a time, and `#loyalty`, `#commerce` and so on deep-link |
 
 `/` redirects to the foundation.
 

@@ -83,13 +83,13 @@ function useSectionFromHash() {
   return useSyncExternalStore(
     subscribe,
     () => window.location.hash.slice(1),
-    () => "" // server render: fall through to the default below
+    () => "" // server render: falls through to the All default below
   );
 }
 
 export function ComponentsSurface() {
   const hash = useSectionFromHash();
-  const active = hash === ALL || SECTIONS.some((s) => s.id === hash) ? hash : SECTIONS[0].id;
+  const active = SECTIONS.some((s) => s.id === hash) ? hash : ALL;
   const showing = active === ALL ? SECTIONS : SECTIONS.filter((s) => s.id === active);
 
   const select = useCallback((id: string) => {
