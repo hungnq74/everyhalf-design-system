@@ -3,7 +3,6 @@
 /** What the system says happened, and what it asks before something is lost. */
 
 import type { ReactNode } from "react";
-import { CircleAlert, CircleCheck, Info, TriangleAlert } from "lucide-react";
 
 import { Button } from "./primitives";
 import styles from "./ui.module.css";
@@ -17,17 +16,22 @@ const alertClass: Record<AlertTone, string> = {
   danger: styles.alertDanger,
 };
 
-const alertIcon: Record<AlertTone, ReactNode> = {
-  info: <Info size={17} />,
-  success: <CircleCheck size={17} />,
-  warning: <TriangleAlert size={17} />,
-  danger: <CircleAlert size={17} />,
+/** The status name, in the product's language. This is the non-colour signal. */
+const alertLabel: Record<AlertTone, string> = {
+  info: "Thông tin",
+  success: "Thành công",
+  warning: "Lưu ý",
+  danger: "Lỗi",
 };
 
 /**
- * Inline, and next to the thing it is about. Tone is never the only signal —
- * each variant carries its own icon so the message survives colour blindness
- * and a screenshot in bright sun.
+ * Inline, and next to the thing it is about.
+ *
+ * A rule and a word rather than a filled pill: the mono status label carries
+ * the meaning, so colour is a marker rather than the message, and the body text
+ * stays ink instead of being tinted to match the tone. Naming the status also
+ * survives colour blindness better than an icon does — a glyph still has to be
+ * interpreted, a word does not.
  */
 export function InlineAlert({
   tone = "info",
@@ -40,11 +44,8 @@ export function InlineAlert({
 }) {
   return (
     <div className={alertClass[tone]} role={tone === "danger" ? "alert" : undefined}>
-      <span style={{ flex: "none", marginTop: 1 }}>{alertIcon[tone]}</span>
-      <span>
-        {title ? <span className={styles.alertTitle}>{title}</span> : null}
-        {children}
-      </span>
+      <span className={styles.alertLabel}>{title ?? alertLabel[tone]}</span>
+      <span>{children}</span>
     </div>
   );
 }
@@ -61,7 +62,6 @@ export function Toast({
 }) {
   return (
     <div className={styles.toast} role="status">
-      <CircleCheck size={17} />
       <span>{children}</span>
       {action ? (
         <button type="button" className={styles.toastAction} onClick={onAction}>

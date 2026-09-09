@@ -11,7 +11,7 @@
 import type { ReactNode } from "react";
 import { Copy, Crown, Gift, QrCode, RefreshCw } from "lucide-react";
 
-import { IconTile, StatusPill } from "./common";
+import { StatusPill } from "./common";
 import styles from "./ui.module.css";
 
 /**
@@ -180,25 +180,22 @@ export function Barcode({ value }: { value: string }) {
 }
 
 /**
- * Eligibility, expiry and store scope travel with the voucher. A benefit whose
+ * Eligibility, expiry and store scope travel with the voucher — a benefit whose
  * limits are one screen away is a benefit that fails at the counter.
+ *
+ * Set as a spec table: a mono label against its value, hairline between. The
+ * same shape the brand guideline uses for its own type specimens, and it reads
+ * as a contract rather than as three decorated cards.
  */
-export function BenefitRow({
-  icon,
-  label,
-  value,
-}: {
-  icon: ReactNode;
-  label: string;
-  value: string;
-}) {
+export function FactList({ children }: { children: ReactNode }) {
+  return <dl className={styles.factList}>{children}</dl>;
+}
+
+export function FactRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className={styles.benefitRow}>
-      <IconTile tone="gold">{icon}</IconTile>
-      <span>
-        <span className={styles.benefitLabel}>{label}</span>
-        <span className={styles.benefitValue}>{value}</span>
-      </span>
+    <div className={styles.factRow}>
+      <dt className={styles.factLabel}>{label}</dt>
+      <dd className={styles.factValue}>{value}</dd>
     </div>
   );
 }

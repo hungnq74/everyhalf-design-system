@@ -39,7 +39,7 @@ const SECTIONS = [
     id: "feedback",
     index: "04",
     title: "Feedback",
-    copy: "Tone is never the only signal — every variant carries an icon too.",
+    copy: "Tone is never the only signal — every status is named in words as well.",
     Body: FeedbackSection,
   },
   {

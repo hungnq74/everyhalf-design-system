@@ -37,23 +37,9 @@ export function StatusPill({
   );
 }
 
-/* ===== Tiles ============================================================= */
+/* ===== Brand mark ======================================================== */
 
-export type Tone = "purple" | "gold" | "success" | "danger" | "neutral";
-
-const toneClass: Record<Tone, string> = {
-  purple: styles.tonePurple,
-  gold: styles.toneGold,
-  success: styles.toneSuccess,
-  danger: styles.toneDanger,
-  neutral: styles.toneNeutral,
-};
-
-export function IconTile({ children, tone = "purple" }: { children: ReactNode; tone?: Tone }) {
-  return <span className={`${styles.iconTile} ${toneClass[tone]}`}>{children}</span>;
-}
-
-/** The EH mark as a tile — used wherever a benefit needs brand weight. */
+/** The EH lockup as a tile. The mark itself — not a glyph in a tinted box. */
 export function MarkTile() {
   return (
     <span className={styles.markTile} aria-hidden>
@@ -72,15 +58,18 @@ export function Card({ children, style }: { children: ReactNode; style?: CSSProp
   );
 }
 
+/**
+ * The workhorse row. Deliberately type-led: no leading icon tile, because a
+ * tinted square with a glyph in it says nothing the title does not already say,
+ * and it is the same square every other app uses.
+ */
 export function Row({
-  icon,
   title,
   sub,
   subTone = "muted",
   trailing,
   onClick,
 }: {
-  icon?: ReactNode;
   title: ReactNode;
   sub?: ReactNode;
   subTone?: "muted" | "brand";
@@ -89,7 +78,6 @@ export function Row({
 }) {
   return (
     <button type="button" className={styles.row} onClick={onClick}>
-      {icon}
       <span className={styles.rowBody}>
         <span className={styles.rowTitle}>{title}</span>
         {sub ? (

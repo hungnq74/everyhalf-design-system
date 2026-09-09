@@ -24,7 +24,7 @@ export function FeedbackSection() {
       <Group
         title="Messages"
         hint="InlineAlert · Toast"
-        note="Alerts sit next to what they are about; toasts report something already finished."
+        note="A rule and a mono status label, not a coloured pill — so the body text stays ink and fully readable. Naming the status is a better non-colour signal than an icon: a word needs no interpreting."
       >
         <SpecGrid>
           <Spec label="Info" source="InlineAlert tone=info" wide stretch>

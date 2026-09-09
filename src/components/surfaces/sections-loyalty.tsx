@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { CalendarDays, Info, MapPin } from "lucide-react";
 
 import { Group, Spec, SpecGrid } from "../workbench/shell";
 import {
   Barcode,
-  BenefitRow,
+  FactList,
+  FactRow,
   LoyaltyHeader,
   Progress,
   QrPass,
@@ -96,7 +96,7 @@ export function LoyaltySection() {
 
       <Group
         title="Vouchers"
-        hint="VoucherTicket · BenefitRow · Barcode"
+        hint="VoucherTicket · FactList · Barcode"
         note="Eligibility, expiry and scope travel with the voucher. Limits a screen away fail at the counter."
       >
         <SpecGrid>
@@ -113,12 +113,17 @@ export function LoyaltySection() {
               code="EHH8WHX2"
             />
           </Spec>
-          <Spec label="Benefit facts" source="BenefitRow" stretch>
-            <div style={{ display: "grid", gap: 8 }}>
-              <BenefitRow icon={<Info size={18} />} label="Điều kiện" value="Không yêu cầu đơn tối thiểu" />
-              <BenefitRow icon={<CalendarDays size={18} />} label="Hạn sử dụng" value="25/11/2026" />
-              <BenefitRow icon={<MapPin size={18} />} label="Áp dụng tại" value="Tất cả cửa hàng" />
-            </div>
+          <Spec
+            label="Benefit facts"
+            source="FactList · FactRow"
+            note="A spec table, not three decorated cards — the shape the brand guideline uses for its own specimens."
+            stretch
+          >
+            <FactList>
+              <FactRow label="Điều kiện" value="Không yêu cầu đơn tối thiểu" />
+              <FactRow label="Hạn sử dụng" value="25/11/2026" />
+              <FactRow label="Áp dụng tại" value="Tất cả cửa hàng" />
+            </FactList>
           </Spec>
           <Spec
             label="Barcode"

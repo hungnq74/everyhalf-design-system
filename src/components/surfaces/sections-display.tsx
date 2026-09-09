@@ -1,6 +1,5 @@
 "use client";
 
-import { Clock, Gift, Sparkles, Ticket } from "lucide-react";
 
 import { Group, Spec, SpecGrid } from "../workbench/shell";
 import {
@@ -8,7 +7,6 @@ import {
   CampaignBanner,
   Card,
   CountBadge,
-  IconTile,
   MarkTile,
   OrderCard,
   StatGroup,
@@ -36,21 +34,10 @@ export function DisplaySection() {
             <CountBadge>27</CountBadge>
             <CountBadge>3</CountBadge>
           </Spec>
-          <Spec label="Icon tiles" source="IconTile · MarkTile" wide>
-            <IconTile tone="purple">
-              <Ticket size={19} />
-            </IconTile>
-            <IconTile tone="gold">
-              <Gift size={19} />
-            </IconTile>
-            <IconTile tone="success">
-              <Sparkles size={19} />
-            </IconTile>
-            <IconTile tone="neutral">
-              <Clock size={19} />
-            </IconTile>
+          <Spec label="Brand mark" source="MarkTile" note="The lockup itself, used where a benefit needs brand weight.">
             <MarkTile />
           </Spec>
+
           <Spec label="Stat group" source="StatGroup" wide stretch>
             <StatGroup
               stats={[

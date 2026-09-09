@@ -246,44 +246,10 @@
   letter-spacing: normal;
 }
 
-/* ===== Icon tile ========================================================= */
+/* ===== Brand mark ======================================================= */
 
-.iconTile {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  flex: none;
-  border-radius: var(--eh-radius-sm);
-}
-
-.tonePurple {
-  background: var(--eh-tint-brand);
-  color: var(--eh-on-brand-tint);
-}
-
-.toneGold {
-  background: var(--eh-gold-50);
-  color: var(--eh-gold-700);
-}
-
-.toneSuccess {
-  background: var(--eh-success-light);
-  color: var(--eh-on-success);
-}
-
-.toneDanger {
-  background: var(--eh-danger-light);
-  color: var(--eh-on-danger);
-}
-
-.toneNeutral {
-  background: var(--eh-bg-subtle);
-  color: var(--eh-text-secondary);
-}
-
-/* Brand mark tile — the EH logo lockup on voucher rows. */
+/* The EH logo lockup, on voucher rows. Kept because it is the mark itself,
+   not a generic glyph in a tinted box. */
 .markTile {
   display: inline-flex;
   align-items: center;
@@ -631,27 +597,31 @@
   cursor: pointer;
 }
 
-/* Benefit facts. Eligibility, expiry and scope travel together — a voucher
-   whose limits are one screen away is a voucher that fails at the counter. */
-.benefitRow {
-  display: flex;
-  align-items: center;
-  gap: var(--eh-space-sm);
-  padding: var(--eh-space-sm) var(--eh-space-md);
-  border-radius: var(--eh-radius-md);
-  background: var(--eh-bg-surface);
-  box-shadow: var(--eh-shadow-card);
+/* Benefit facts, set as a spec table rather than a stack of icon cards — the
+   same shape the brand guideline uses for its own type specimens. */
+.factList {
+  display: grid;
+  border-top: 1px solid var(--eh-border-default);
 }
 
-.benefitLabel {
-  display: block;
-  font: var(--eh-text-caption);
+.factRow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: var(--eh-space-sm);
+  align-items: baseline;
+  padding: var(--eh-space-sm) 0;
+  border-bottom: 1px solid var(--eh-border-default);
+}
+
+.factLabel {
+  font: var(--eh-text-eyebrow);
+  font-family: var(--eh-font-mono);
+  letter-spacing: var(--eh-tracking-eyebrow);
+  text-transform: uppercase;
   color: var(--eh-text-secondary);
 }
 
-.benefitValue {
-  display: block;
-  margin-top: 1px;
+.factValue {
   font: var(--eh-text-label);
   font-weight: 600;
   color: var(--eh-text-primary);
@@ -1351,42 +1321,60 @@
 
 /* ===== Feedback ========================================================== */
 
+/* A rule and a word, not a coloured pill. The status name carries the meaning —
+   which is a better non-colour signal than an icon — so the body text can stay
+   ink and fully readable instead of being tinted to match. */
 .alert {
-  display: flex;
-  gap: var(--eh-space-sm);
-  padding: var(--eh-space-sm) var(--eh-space-md);
-  border-radius: var(--eh-radius-sm);
+  display: grid;
+  gap: 2px;
+  padding: var(--eh-space-2xs) 0 var(--eh-space-2xs) var(--eh-space-sm);
+  border-left: 2px solid var(--eh-border-strong);
   font: var(--eh-text-body);
   letter-spacing: normal;
+  color: var(--eh-text-primary);
+}
+
+.alertLabel {
+  font: var(--eh-text-eyebrow);
+  font-family: var(--eh-font-mono);
+  letter-spacing: var(--eh-tracking-eyebrow);
+  text-transform: uppercase;
 }
 
 .alertInfo {
   composes: alert;
-  background: var(--eh-tint-brand);
-  color: var(--eh-on-brand-tint);
+  border-left-color: var(--eh-eh-purple);
+}
+
+.alertInfo .alertLabel {
+  color: var(--eh-text-brand);
 }
 
 .alertSuccess {
   composes: alert;
-  background: var(--eh-success-light);
+  border-left-color: var(--eh-success);
+}
+
+.alertSuccess .alertLabel {
   color: var(--eh-on-success);
 }
 
 .alertWarning {
   composes: alert;
-  background: var(--eh-warning-light);
+  border-left-color: var(--eh-warning);
+}
+
+.alertWarning .alertLabel {
   color: var(--eh-on-warning);
 }
 
 .alertDanger {
   composes: alert;
-  background: var(--eh-danger-light);
-  color: var(--eh-on-danger);
+  border-left-color: var(--eh-danger);
 }
 
-.alertTitle {
-  display: block;
-  font-weight: 700;
+.alertDanger .alertLabel {
+  color: var(--eh-on-danger);
 }
 
 /* Toast — ink, because it reports something that already happened. */
@@ -1412,9 +1400,12 @@
   border: 0;
   background: none;
   color: inherit;
-  font: var(--eh-text-label);
-  font-weight: 700;
+  font: var(--eh-text-eyebrow);
+  font-family: var(--eh-font-mono);
+  letter-spacing: var(--eh-tracking-eyebrow);
+  text-transform: uppercase;
   text-decoration: underline;
+  text-underline-offset: 3px;
   cursor: pointer;
 }
 

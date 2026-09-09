@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, ChevronRight, Clock, Gift, Settings, Ticket } from "lucide-react";
+import { Bell, ChevronRight, Gift } from "lucide-react";
 
 import { Viewport } from "../workbench/viewport";
 import { Group, Spec, SpecGrid } from "../workbench/shell";
@@ -12,7 +12,6 @@ import {
   Card,
   Divider,
   IconButton,
-  IconTile,
   Row,
   SectionHead,
   type NavTab,
@@ -67,7 +66,7 @@ export function NavigationSection() {
       <Group
         title="Lists and disclosure"
         hint="Row · SectionHead · Divider · Accordion"
-        note="One component, many jobs. The subtitle turns purple when it carries earned value or an expiry."
+        note="Type-led, with a hairline between. The subtitle turns purple when it carries earned value or an expiry."
       >
         <SpecGrid>
           <Spec label="Section head" source="SectionHead" wide stretch>
@@ -81,32 +80,17 @@ export function NavigationSection() {
           <Spec label="Row" source="Row" wide stretch>
             <Card>
               <Row
-                icon={
-                  <IconTile tone="purple">
-                    <Ticket size={19} />
-                  </IconTile>
-                }
                 title="Voucher trị giá 200.000 VNĐ"
                 sub="HSD: 25/11/2026"
                 subTone="brand"
               />
               <Divider />
               <Row
-                icon={
-                  <IconTile tone="neutral">
-                    <Clock size={19} />
-                  </IconTile>
-                }
                 title="Lịch sử đơn hàng"
                 sub="1 đơn hàng"
               />
               <Divider />
               <Row
-                icon={
-                  <IconTile tone="neutral">
-                    <Settings size={19} />
-                  </IconTile>
-                }
                 title="Cài đặt"
                 sub="Chính sách, liên hệ"
               />
