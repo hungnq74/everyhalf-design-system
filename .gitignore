@@ -11,3 +11,4 @@ next-env.d.ts
 # screenshots contain a real member's face, points balance and order codes.
 docs/EH_Guideline_Color&Typo.pdf
 docs/reference/
+.vercel
