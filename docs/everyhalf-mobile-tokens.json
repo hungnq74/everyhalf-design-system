@@ -1,0 +1,79 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "brand": {
+    "purple": { "$type": "color", "$value": "#7864BE", "$description": "Every Half primary brand color" },
+    "purplePressed": { "$type": "color", "$value": "#604A9F" },
+    "purpleSoft": { "$type": "color", "$value": "#C8BEF0" },
+    "ink": { "$type": "color", "$value": "#231F20" },
+    "gray": { "$type": "color", "$value": "#D0D2D3" },
+    "whiteSoft": { "$type": "color", "$value": "#F1F1F2" }
+  },
+  "color": {
+    "surface": {
+      "canvas": { "$type": "color", "$value": "#FAFAF9" },
+      "base": { "$type": "color", "$value": "#FFFFFF" },
+      "subtle": { "$type": "color", "$value": "#F1F1F2" },
+      "selected": { "$type": "color", "$value": "#EEEAFB" },
+      "inverse": { "$type": "color", "$value": "#231F20" },
+      "loyalty": { "$type": "color", "$value": "#2A1B2B" },
+      "loyaltyRaised": { "$type": "color", "$value": "#382343" }
+    },
+    "text": {
+      "primary": { "$type": "color", "$value": "#231F20" },
+      "secondary": { "$type": "color", "$value": "#766F6E" },
+      "tertiary": { "$type": "color", "$value": "#9D9897" },
+      "inverse": { "$type": "color", "$value": "#FFFFFF" },
+      "brand": { "$type": "color", "$value": "#604A9F" },
+      "link": { "$type": "color", "$value": "#604A9F" }
+    },
+    "border": {
+      "default": { "$type": "color", "$value": "#E5E3E2" },
+      "subtle": { "$type": "color", "$value": "#F1F1F2" },
+      "strong": { "$type": "color", "$value": "#C5C1BF" },
+      "focus": { "$type": "color", "$value": "#604A9F" },
+      "error": { "$type": "color", "$value": "#C83E41" }
+    },
+    "status": {
+      "success": { "$type": "color", "$value": "#008A61" },
+      "successSoft": { "$type": "color", "$value": "#E4F7F0" },
+      "warning": { "$type": "color", "$value": "#9A6200" },
+      "warningSoft": { "$type": "color", "$value": "#FFF4D7" },
+      "danger": { "$type": "color", "$value": "#C83E41" },
+      "dangerSoft": { "$type": "color", "$value": "#FEECED" },
+      "info": { "$type": "color", "$value": "#604A9F" },
+      "gold": { "$type": "color", "$value": "#BA9238" }
+    }
+  },
+  "font": {
+    "display": { "$type": "fontFamily", "$value": ["Bricolage Grotesque", "Arial", "sans-serif"] },
+    "body": { "$type": "fontFamily", "$value": ["Bricolage Grotesque", "Arial", "sans-serif"] },
+    "editorial": { "$type": "fontFamily", "$value": ["Pitch Sans", "Courier New", "monospace"] }
+  },
+  "typography": {
+    "display": { "$type": "typography", "$value": { "fontFamily": "{font.display}", "fontWeight": 700, "fontSize": "32px", "lineHeight": "38px", "letterSpacing": "-0.7px" } },
+    "headline": { "$type": "typography", "$value": { "fontFamily": "{font.display}", "fontWeight": 700, "fontSize": "24px", "lineHeight": "30px", "letterSpacing": "-0.4px" } },
+    "title": { "$type": "typography", "$value": { "fontFamily": "{font.body}", "fontWeight": 700, "fontSize": "20px", "lineHeight": "26px", "letterSpacing": "-0.25px" } },
+    "bodyLarge": { "$type": "typography", "$value": { "fontFamily": "{font.body}", "fontWeight": 500, "fontSize": "17px", "lineHeight": "24px", "letterSpacing": "0px" } },
+    "body": { "$type": "typography", "$value": { "fontFamily": "{font.body}", "fontWeight": 500, "fontSize": "16px", "lineHeight": "22px", "letterSpacing": "0px" } },
+    "label": { "$type": "typography", "$value": { "fontFamily": "{font.body}", "fontWeight": 600, "fontSize": "14px", "lineHeight": "20px", "letterSpacing": "0px" } },
+    "caption": { "$type": "typography", "$value": { "fontFamily": "{font.body}", "fontWeight": 500, "fontSize": "12px", "lineHeight": "16px", "letterSpacing": "0px" } },
+    "eyebrow": { "$type": "typography", "$value": { "fontFamily": "{font.editorial}", "fontWeight": 700, "fontSize": "12px", "lineHeight": "16px", "letterSpacing": "0.8px" } },
+    "price": { "$type": "typography", "$value": { "fontFamily": "{font.body}", "fontWeight": 700, "fontSize": "24px", "lineHeight": "30px", "letterSpacing": "-0.3px" } }
+  },
+  "space": {
+    "0": { "$type": "dimension", "$value": "0px" }, "1": { "$type": "dimension", "$value": "4px" }, "2": { "$type": "dimension", "$value": "8px" }, "3": { "$type": "dimension", "$value": "12px" }, "4": { "$type": "dimension", "$value": "16px" }, "5": { "$type": "dimension", "$value": "20px" }, "6": { "$type": "dimension", "$value": "24px" }, "8": { "$type": "dimension", "$value": "32px" }, "10": { "$type": "dimension", "$value": "40px" }, "12": { "$type": "dimension", "$value": "48px" }
+  },
+  "radius": {
+    "control": { "$type": "dimension", "$value": "14px" }, "card": { "$type": "dimension", "$value": "20px" }, "hero": { "$type": "dimension", "$value": "28px" }, "pill": { "$type": "dimension", "$value": "999px" }
+  },
+  "size": {
+    "tapTarget": { "$type": "dimension", "$value": "44px" }, "button": { "$type": "dimension", "$value": "52px" }, "buttonCompact": { "$type": "dimension", "$value": "44px" }, "field": { "$type": "dimension", "$value": "52px" }, "nav": { "$type": "dimension", "$value": "80px" }, "icon": { "$type": "dimension", "$value": "24px" }
+  },
+  "shadow": {
+    "card": { "$type": "shadow", "$value": { "color": "#231F2010", "offsetX": "0px", "offsetY": "6px", "blur": "20px", "spread": "0px" } },
+    "float": { "$type": "shadow", "$value": { "color": "#231F2024", "offsetX": "0px", "offsetY": "10px", "blur": "28px", "spread": "0px" } }
+  },
+  "motion": {
+    "instant": { "$type": "duration", "$value": "100ms" }, "standard": { "$type": "duration", "$value": "200ms" }, "emphasized": { "$type": "duration", "$value": "320ms" }, "easeStandard": { "$type": "cubicBezier", "$value": [0.2, 0, 0, 1] }
+  }
+}

@@ -1,0 +1,1783 @@
+/* Every Half mobile components.
+   Every value here reads a --eh-* token from tokens.ts. No literal colours. */
+
+/* --- shared ------------------------------------------------------------- */
+
+.reset {
+  letter-spacing: normal;
+  font-family: var(--eh-font-body);
+}
+
+/* ===== Action bar — the one committed action on a screen ================= */
+
+.actionBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eh-space-sm);
+  width: 100%;
+  min-height: var(--eh-action-height);
+  padding-inline: var(--eh-space-lg);
+  border: 0;
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-inverse);
+  color: var(--eh-text-inverse);
+  font: var(--eh-text-label);
+  letter-spacing: normal;
+  cursor: pointer;
+  transition: transform var(--eh-motion-fast), opacity var(--eh-motion-fast);
+}
+
+.actionBar:active {
+  transform: scale(0.985);
+}
+
+.actionBar:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.actionBarRule {
+  width: 1px;
+  height: 18px;
+  background: currentColor;
+  opacity: 0.28;
+}
+
+.actionBarAmount {
+  font-weight: 600;
+}
+
+/* Secondary: same footprint, no commitment. */
+.actionBarQuiet {
+  composes: actionBar;
+  background: var(--eh-bg-subtle);
+  color: var(--eh-text-primary);
+}
+
+/* ===== Chips ============================================================= */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--eh-tap-min);
+  padding: 0 var(--eh-space-md);
+  border: 1px solid var(--eh-border-strong);
+  border-radius: var(--eh-radius-xs);
+  background: var(--eh-bg-surface);
+  color: var(--eh-text-primary);
+  font: var(--eh-text-label);
+  letter-spacing: normal;
+  cursor: pointer;
+  transition: background var(--eh-motion-instant), border-color var(--eh-motion-instant),
+    color var(--eh-motion-instant);
+}
+
+.chipSelected {
+  composes: chip;
+  border-color: var(--eh-pure-black);
+  background: var(--eh-pure-black);
+  color: #fff;
+}
+
+/* Only after a failed submit — never as the resting state of a required group. */
+.chipError {
+  composes: chip;
+  border-color: var(--eh-border-error);
+  color: var(--eh-on-danger);
+}
+
+.chipDisabled {
+  composes: chip;
+  border-color: var(--eh-border-default);
+  background: var(--eh-bg-subtle);
+  color: var(--eh-text-disabled);
+  cursor: not-allowed;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eh-space-xs);
+}
+
+/* Filter pill — the horizontally scrolling row above a list. */
+.filterChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 var(--eh-space-md);
+  border: 1px solid var(--eh-border-strong);
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-bg-surface);
+  color: var(--eh-text-primary);
+  font: var(--eh-text-label);
+  letter-spacing: normal;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filterChipSelected {
+  composes: filterChip;
+  border-color: var(--eh-pure-black);
+  background: var(--eh-pure-black);
+  color: #fff;
+}
+
+.filterCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-bg-subtle);
+  color: var(--eh-text-primary);
+  font: var(--eh-text-caption);
+  font-weight: 600;
+}
+
+.filterChipSelected .filterCount {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.filterRail {
+  display: flex;
+  gap: var(--eh-space-xs);
+  overflow-x: auto;
+  padding-block: var(--eh-space-xs);
+  scrollbar-width: none;
+}
+
+.filterRail::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== Status pill ======================================================= */
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--eh-radius-full);
+  font: var(--eh-text-caption);
+  font-weight: 600;
+  letter-spacing: normal;
+  border: 1px solid transparent;
+}
+
+.statusSuccess {
+  composes: statusPill;
+  background: var(--eh-success-light);
+  border-color: var(--eh-success);
+  color: var(--eh-on-success);
+}
+
+.statusWarning {
+  composes: statusPill;
+  background: var(--eh-warning-light);
+  color: var(--eh-on-warning);
+}
+
+.statusDanger {
+  composes: statusPill;
+  background: var(--eh-danger-light);
+  color: var(--eh-on-danger);
+}
+
+.statusNeutral {
+  composes: statusPill;
+  background: var(--eh-bg-subtle);
+  color: var(--eh-text-secondary);
+}
+
+.statusGold {
+  composes: statusPill;
+  background: var(--eh-gold-50);
+  color: var(--eh-on-gold);
+}
+
+/* ===== Quantity stepper ================================================== */
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eh-space-lg);
+}
+
+.stepperButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--eh-tap-min);
+  height: var(--eh-tap-min);
+  border: 1px solid var(--eh-border-strong);
+  border-radius: var(--eh-radius-sm);
+  background: var(--eh-bg-surface);
+  color: var(--eh-text-primary);
+  cursor: pointer;
+}
+
+.stepperButton:disabled {
+  color: var(--eh-text-disabled);
+  border-color: var(--eh-border-default);
+  cursor: not-allowed;
+}
+
+.stepperAdd {
+  composes: stepperButton;
+  border-color: var(--eh-pure-black);
+  background: var(--eh-pure-black);
+  color: #fff;
+}
+
+.stepperValue {
+  min-width: 24px;
+  text-align: center;
+  font: var(--eh-text-body-lg);
+  font-weight: 600;
+  letter-spacing: normal;
+}
+
+/* ===== Icon tile ========================================================= */
+
+.iconTile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: var(--eh-radius-sm);
+}
+
+.tonePurple {
+  background: var(--eh-tint-brand);
+  color: var(--eh-on-brand-tint);
+}
+
+.toneGold {
+  background: var(--eh-gold-50);
+  color: var(--eh-gold-700);
+}
+
+.toneSuccess {
+  background: var(--eh-success-light);
+  color: var(--eh-on-success);
+}
+
+.toneDanger {
+  background: var(--eh-danger-light);
+  color: var(--eh-on-danger);
+}
+
+.toneNeutral {
+  background: var(--eh-bg-subtle);
+  color: var(--eh-text-secondary);
+}
+
+/* Brand mark tile — the EH logo lockup on voucher rows. */
+.markTile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: var(--eh-radius-sm);
+  background: var(--eh-eh-purple);
+  color: #fff;
+  font: var(--eh-text-caption);
+  font-family: var(--eh-font-display);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: 0.5px;
+  text-align: center;
+  white-space: pre-line;
+}
+
+/* ===== Card + rows ======================================================= */
+
+.card {
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-sm);
+  width: 100%;
+  min-height: var(--eh-tap-min);
+  padding: var(--eh-space-sm) var(--eh-space-md);
+  border: 0;
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  color: inherit;
+  text-align: left;
+  font: var(--eh-text-body);
+  letter-spacing: normal;
+  cursor: pointer;
+}
+
+.rowBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.rowTitle {
+  display: block;
+  font: var(--eh-text-label);
+  font-weight: 600;
+  color: var(--eh-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowSub {
+  display: block;
+  margin-top: 2px;
+  font: var(--eh-text-caption);
+  color: var(--eh-text-secondary);
+}
+
+.rowSubBrand {
+  composes: rowSub;
+  color: var(--eh-text-brand);
+  font-weight: 600;
+}
+
+.chevron {
+  flex: none;
+  color: var(--eh-text-disabled);
+}
+
+/* ===== Section header ==================================================== */
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-xs);
+  margin: var(--eh-space-lg) 0 var(--eh-space-sm);
+}
+
+.sectionTitle {
+  flex: 1;
+  margin: 0;
+  font: var(--eh-text-title);
+  font-family: var(--eh-font-display);
+  font-variation-settings: "wdth" var(--eh-width-title);
+  letter-spacing: var(--eh-tracking-title);
+  color: var(--eh-text-primary);
+}
+
+.sectionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: var(--eh-text-caption);
+  font-weight: 600;
+  color: var(--eh-text-brand);
+  cursor: pointer;
+}
+
+/* ===== Stamp board ======================================================= */
+
+.stampGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--eh-space-sm);
+  justify-items: center;
+}
+
+.stampGridWide {
+  composes: stampGrid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px;
+}
+
+.stamp {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 44px;
+  aspect-ratio: 1;
+  border-radius: var(--eh-radius-full);
+}
+
+/* Earned: a filled ring — the hole reads as a coffee cup seen from above. */
+.stampFilled {
+  composes: stamp;
+  background: var(--eh-eh-purple);
+}
+
+.stampFilled::after {
+  content: "";
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-bg-surface);
+}
+
+.stampGoldFilled {
+  composes: stamp;
+  background: var(--eh-gold-500);
+}
+
+.stampGoldFilled::after {
+  content: "";
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-loyalty-base);
+}
+
+.stampEmpty {
+  composes: stamp;
+  border: 1.5px solid var(--eh-border-strong);
+}
+
+/* The tenth slot is the prize, so it is drawn as a coupon rather than a stamp. */
+.stampReward {
+  composes: stamp;
+  border: 1.5px dashed var(--eh-gold-500);
+  background: var(--eh-gold-50);
+  color: var(--eh-on-gold);
+}
+
+.progressTrack {
+  height: 8px;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-bg-subtle);
+  overflow: hidden;
+}
+
+.progressFill {
+  /* A span inside a plain block: without display:block the height is ignored
+     and the bar renders empty. */
+  display: block;
+  height: 100%;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-eh-purple);
+  transition: width var(--eh-motion-slow);
+}
+
+.progressFillGold {
+  composes: progressFill;
+  background: var(--eh-gold-500);
+}
+
+/* ===== Loyalty header ==================================================== */
+
+.loyaltyHeader {
+  padding: var(--eh-space-lg) var(--eh-gutter) var(--eh-space-xl);
+  border-radius: 0 0 var(--eh-radius-xl) var(--eh-radius-xl);
+  background: var(--eh-loyalty-base);
+  color: #fff;
+}
+
+.loyaltyWarm {
+  composes: loyaltyHeader;
+  background: var(--eh-loyalty-warm);
+}
+
+.loyaltyEyebrow {
+  margin: 0;
+  font: var(--eh-text-eyebrow);
+  font-family: var(--eh-font-mono);
+  letter-spacing: var(--eh-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--eh-gold-300);
+}
+
+.loyaltyPoints {
+  margin: 2px 0 0;
+  font: var(--eh-text-display);
+  font-family: var(--eh-font-display);
+  font-variation-settings: "wdth" var(--eh-width-display), "opsz" 40;
+  letter-spacing: var(--eh-tracking-display);
+  color: #fff;
+}
+
+.tierBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--eh-radius-full);
+  background: linear-gradient(180deg, var(--eh-gold-500), var(--eh-gold-700));
+  color: #fff;
+  font: var(--eh-text-caption);
+  font-weight: 700;
+  letter-spacing: normal;
+}
+
+/* ===== Voucher ticket ==================================================== */
+
+.ticket {
+  border-radius: var(--eh-radius-lg);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+  overflow: hidden;
+}
+
+.ticketHero {
+  padding: var(--eh-space-xl) var(--eh-space-lg);
+  background: var(--eh-loyalty-base);
+  color: #fff;
+  text-align: center;
+}
+
+.ticketTitle {
+  margin: var(--eh-space-sm) 0 0;
+  font: var(--eh-text-headline);
+  font-family: var(--eh-font-display);
+  font-variation-settings: "wdth" var(--eh-width-headline);
+  letter-spacing: var(--eh-tracking-headline);
+}
+
+.ticketKind {
+  margin: var(--eh-space-xs) 0 0;
+  font: var(--eh-text-eyebrow);
+  font-family: var(--eh-font-mono);
+  letter-spacing: var(--eh-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--eh-gold-300);
+}
+
+/* The perforation. Two notches punched out of the side, plus a dashed rule —
+   it signals "detachable benefit" faster than any label would. */
+.ticketPerf {
+  position: relative;
+  height: var(--eh-space-lg);
+  background: var(--eh-loyalty-base);
+}
+
+.ticketPerf::before,
+.ticketPerf::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: var(--eh-space-lg);
+  height: var(--eh-space-lg);
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-bg-canvas);
+  transform: translateY(-50%);
+}
+
+.ticketPerf::before {
+  left: calc(var(--eh-space-lg) / -2);
+}
+
+.ticketPerf::after {
+  right: calc(var(--eh-space-lg) / -2);
+}
+
+.ticketBody {
+  padding: var(--eh-space-lg);
+  text-align: center;
+}
+
+.barcode {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  height: 64px;
+  margin-bottom: var(--eh-space-sm);
+}
+
+.barcodeBar {
+  width: 2px;
+  height: 100%;
+  background: var(--eh-text-primary);
+}
+
+.ticketCode {
+  font: var(--eh-text-body-lg);
+  font-family: var(--eh-font-mono);
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--eh-text-primary);
+}
+
+.copyHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: var(--eh-space-xs);
+  border: 0;
+  background: none;
+  font: var(--eh-text-caption);
+  color: var(--eh-text-secondary);
+  cursor: pointer;
+}
+
+/* Benefit facts. Eligibility, expiry and scope travel together — a voucher
+   whose limits are one screen away is a voucher that fails at the counter. */
+.benefitRow {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-sm);
+  padding: var(--eh-space-sm) var(--eh-space-md);
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+}
+
+.benefitLabel {
+  display: block;
+  font: var(--eh-text-caption);
+  color: var(--eh-text-secondary);
+}
+
+.benefitValue {
+  display: block;
+  margin-top: 1px;
+  font: var(--eh-text-label);
+  font-weight: 600;
+  color: var(--eh-text-primary);
+}
+
+/* ===== Commerce ========================================================== */
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--eh-space-sm);
+}
+
+.productTile {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+  overflow: hidden;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+}
+
+.productMedia {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--eh-bg-subtle);
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The add button sits on the image, bottom-right: the thumb's natural target. */
+.productAdd {
+  position: absolute;
+  right: var(--eh-space-xs);
+  bottom: calc(var(--eh-space-xs) * -1);
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-pure-black);
+  color: #fff;
+  cursor: pointer;
+}
+
+.productInfo {
+  padding: var(--eh-space-sm) var(--eh-space-sm) var(--eh-space-md);
+}
+
+.productName {
+  margin: 0;
+  font: var(--eh-text-label);
+  font-weight: 600;
+  color: var(--eh-text-primary);
+}
+
+.productPrice {
+  display: block;
+  margin-top: 6px;
+  font: var(--eh-text-label);
+  font-weight: 700;
+  color: var(--eh-text-brand);
+}
+
+.productRow {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-sm);
+  width: 100%;
+  padding: var(--eh-space-sm) 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.productThumb {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: var(--eh-radius-sm);
+  object-fit: cover;
+  background: var(--eh-bg-subtle);
+}
+
+.storeBar {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-xs);
+  padding: var(--eh-space-sm) 0;
+  font: var(--eh-text-caption);
+  color: var(--eh-text-secondary);
+}
+
+.storeName {
+  font: var(--eh-text-label);
+  font-weight: 600;
+  color: var(--eh-text-primary);
+}
+
+.storeChange {
+  margin-left: auto;
+  border: 0;
+  background: none;
+  font: var(--eh-text-caption);
+  font-weight: 600;
+  color: var(--eh-text-brand);
+  cursor: pointer;
+}
+
+/* Cart bar — count and total, with the pre-discount price struck through so the
+   saving is visible before checkout rather than discovered inside it. */
+.cartBar {
+  composes: actionBar;
+  justify-content: space-between;
+}
+
+.cartBarStrike {
+  margin-left: 6px;
+  font-weight: 400;
+  text-decoration: line-through;
+  opacity: 0.55;
+}
+
+.bill {
+  display: grid;
+  gap: var(--eh-space-xs);
+  padding: var(--eh-space-md);
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+}
+
+.billRow {
+  display: flex;
+  justify-content: space-between;
+  font: var(--eh-text-body);
+  letter-spacing: normal;
+  color: var(--eh-text-secondary);
+}
+
+.billRow b {
+  font-weight: 500;
+  color: var(--eh-text-primary);
+}
+
+.billDiscount b {
+  color: var(--eh-on-success);
+}
+
+.billRule {
+  height: 1px;
+  margin: var(--eh-space-2xs) 0;
+  background: var(--eh-border-default);
+}
+
+.billTotal {
+  display: flex;
+  justify-content: space-between;
+  font: var(--eh-text-body-lg);
+  font-weight: 700;
+  letter-spacing: normal;
+  color: var(--eh-text-primary);
+}
+
+.billTotal b {
+  color: var(--eh-text-brand);
+}
+
+.billSaving {
+  text-align: right;
+  font: var(--eh-text-caption);
+  font-weight: 600;
+  color: var(--eh-on-success);
+}
+
+/* ===== Timeline ========================================================== */
+
+.timeline {
+  display: grid;
+  gap: var(--eh-space-sm);
+}
+
+.timelineItem {
+  display: flex;
+  gap: var(--eh-space-sm);
+}
+
+.timelineMark {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: var(--eh-radius-full);
+  border: 1.5px solid var(--eh-success);
+  background: var(--eh-success-light);
+  color: var(--eh-on-success);
+}
+
+.timelineMarkDone {
+  composes: timelineMark;
+  border-color: var(--eh-eh-purple);
+  background: var(--eh-eh-purple);
+  color: #fff;
+}
+
+.timelineMarkPending {
+  composes: timelineMark;
+  border-color: var(--eh-border-strong);
+  background: var(--eh-bg-subtle);
+  color: var(--eh-text-disabled);
+}
+
+.timelineAmount {
+  font: var(--eh-text-label);
+  font-weight: 700;
+  color: var(--eh-on-success);
+}
+
+/* ===== Campaign banner =================================================== */
+
+.banner {
+  display: grid;
+  place-items: center;
+  padding: var(--eh-space-xl) var(--eh-space-md);
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-campaign);
+  color: var(--eh-pure-black);
+  text-align: center;
+}
+
+.bannerTitle {
+  margin: 0;
+  font: var(--eh-text-headline);
+  font-family: var(--eh-font-display);
+  font-variation-settings: "wdth" 82;
+  letter-spacing: -0.5px;
+}
+
+.bannerNote {
+  margin: 4px 0 0;
+  font: var(--eh-text-eyebrow);
+  font-family: var(--eh-font-mono);
+  letter-spacing: var(--eh-tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+/* ===== Field ============================================================= */
+
+.field {
+  display: block;
+}
+
+.fieldLabel {
+  display: block;
+  margin-bottom: 6px;
+  font: var(--eh-text-label);
+  font-weight: 600;
+  color: var(--eh-text-primary);
+}
+
+.fieldOptional {
+  font-weight: 400;
+  color: var(--eh-text-secondary);
+}
+
+.fieldInput {
+  width: 100%;
+  min-height: var(--eh-tap-min);
+  padding: var(--eh-space-sm);
+  border: 1px solid var(--eh-border-default);
+  border-radius: var(--eh-radius-sm);
+  background: var(--eh-bg-surface);
+  color: var(--eh-text-primary);
+  font: var(--eh-text-body);
+  letter-spacing: normal;
+  resize: none;
+}
+
+.fieldInput::placeholder {
+  color: var(--eh-text-disabled);
+}
+
+.fieldError {
+  display: block;
+  margin-top: 6px;
+  font: var(--eh-text-caption);
+  font-weight: 600;
+  color: var(--eh-on-danger);
+}
+
+/* ==========================================================================
+   Buttons — the standalone kind. The sticky action bar above is a different
+   component with a different job; these are the buttons that sit in content.
+   ========================================================================== */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eh-space-xs);
+  min-height: var(--eh-tap-min);
+  padding: 0 var(--eh-space-lg);
+  border: 1px solid transparent;
+  border-radius: var(--eh-radius-full);
+  font: var(--eh-text-label);
+  font-weight: 600;
+  letter-spacing: normal;
+  cursor: pointer;
+  transition: opacity var(--eh-motion-fast), background var(--eh-motion-fast);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Ink. A commitment: it costs money, a stamp or a redemption. */
+.buttonPrimary {
+  composes: button;
+  background: var(--eh-pure-black);
+  color: #fff;
+}
+
+/* Outlined. Reversible, and never the only action on a screen. */
+.buttonSecondary {
+  composes: button;
+  border-color: var(--eh-border-strong);
+  background: var(--eh-bg-surface);
+  color: var(--eh-text-primary);
+}
+
+/* Text only. Navigation and disclosure — this is where purple is allowed. */
+.buttonTertiary {
+  composes: button;
+  padding: 0 var(--eh-space-xs);
+  background: none;
+  color: var(--eh-text-brand);
+}
+
+.buttonDanger {
+  composes: button;
+  background: var(--eh-danger-light);
+  color: var(--eh-danger-dark);
+}
+
+.buttonSmall {
+  min-height: 36px;
+  padding: 0 var(--eh-space-md);
+  font-size: 13px;
+}
+
+.buttonBlock {
+  width: 100%;
+}
+
+.iconButton {
+  display: inline-grid;
+  place-items: center;
+  width: var(--eh-tap-min);
+  height: var(--eh-tap-min);
+  border: 0;
+  border-radius: var(--eh-radius-full);
+  background: none;
+  color: var(--eh-text-primary);
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  background: var(--eh-bg-subtle);
+}
+
+/* A spinner that borrows the button's own colour. */
+.spinner {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--eh-radius-full);
+  animation: ehSpin 700ms linear infinite;
+}
+
+@keyframes ehSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2.4s;
+  }
+}
+
+/* ===== Segmented control ================================================= */
+
+.segmented {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-bg-subtle);
+}
+
+.segment {
+  min-height: 38px;
+  padding: 0 var(--eh-space-md);
+  border: 0;
+  border-radius: var(--eh-radius-full);
+  background: none;
+  color: var(--eh-text-secondary);
+  font: var(--eh-text-label);
+  letter-spacing: normal;
+  cursor: pointer;
+}
+
+.segmentOn {
+  composes: segment;
+  background: var(--eh-bg-surface);
+  color: var(--eh-text-primary);
+  font-weight: 600;
+  box-shadow: var(--eh-shadow-card);
+}
+
+/* ===== Switch, checkbox, radio =========================================== */
+
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 50px;
+  height: 30px;
+  flex: none;
+  padding: 3px;
+  border: 0;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-neutral-300);
+  cursor: pointer;
+  transition: background var(--eh-motion-fast);
+}
+
+.switchOn {
+  composes: switch;
+  background: var(--eh-eh-purple);
+}
+
+.switchKnob {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--eh-radius-full);
+  background: #fff;
+  transition: transform var(--eh-motion-fast);
+}
+
+.switchOn .switchKnob {
+  transform: translateX(20px);
+}
+
+.checkbox,
+.radio {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border: 1.5px solid var(--eh-border-strong);
+  background: var(--eh-bg-surface);
+  color: transparent;
+  cursor: pointer;
+}
+
+.checkbox {
+  border-radius: 6px;
+}
+
+.radio {
+  border-radius: var(--eh-radius-full);
+}
+
+.checkboxOn {
+  composes: checkbox;
+  border-color: var(--eh-eh-purple);
+  background: var(--eh-eh-purple);
+  color: #fff;
+}
+
+.radioOn {
+  composes: radio;
+  border-color: var(--eh-eh-purple);
+  border-width: 6px;
+}
+
+/* The whole row is the target, not just the 22px control. */
+.controlRow {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-sm);
+  width: 100%;
+  min-height: var(--eh-tap-min);
+  padding: var(--eh-space-xs) 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: var(--eh-text-body);
+  letter-spacing: normal;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* ===== Text input ======================================================== */
+
+.input {
+  width: 100%;
+  min-height: var(--eh-tap-min);
+  padding: 0 var(--eh-space-sm);
+  border: 1px solid var(--eh-border-default);
+  border-radius: var(--eh-radius-sm);
+  background: var(--eh-bg-surface);
+  color: var(--eh-text-primary);
+  font: var(--eh-text-body);
+  letter-spacing: normal;
+}
+
+.inputInvalid {
+  composes: input;
+  border-color: var(--eh-border-error);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-xs);
+  min-height: var(--eh-tap-min);
+  padding: 0 var(--eh-space-sm);
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-bg-subtle);
+  color: var(--eh-text-secondary);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: var(--eh-text-primary);
+  font: var(--eh-text-body);
+  letter-spacing: normal;
+  outline: none;
+}
+
+.otpRow {
+  display: flex;
+  gap: var(--eh-space-xs);
+}
+
+.otpCell {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 54px;
+  border: 1.5px solid var(--eh-border-default);
+  border-radius: var(--eh-radius-sm);
+  background: var(--eh-bg-surface);
+  font: var(--eh-text-title);
+  font-family: var(--eh-font-mono);
+  font-weight: 700;
+}
+
+.otpCellActive {
+  composes: otpCell;
+  border-color: var(--eh-eh-purple);
+}
+
+/* ===== Navigation ======================================================== */
+
+.appBar {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-xs);
+  padding: var(--eh-space-xs) var(--eh-space-xs) var(--eh-space-sm);
+  background: var(--eh-bg-canvas);
+}
+
+.appBarTitle {
+  flex: 1;
+  font: var(--eh-text-body-lg);
+  font-weight: 600;
+  text-align: center;
+}
+
+.appBarSlot {
+  width: var(--eh-tap-min);
+  flex: none;
+}
+
+.bottomNav {
+  display: flex;
+  border-top: 1px solid var(--eh-border-default);
+  background: var(--eh-bg-surface);
+  padding-bottom: 6px;
+}
+
+.navTab {
+  flex: 1;
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  min-height: var(--eh-tap-min);
+  padding: 8px 0 4px;
+  border: 0;
+  background: none;
+  color: var(--eh-text-secondary);
+  font: var(--eh-text-caption);
+  font-size: 11px;
+  letter-spacing: normal;
+  cursor: pointer;
+}
+
+.navTabOn {
+  composes: navTab;
+  color: var(--eh-eh-purple);
+  font-weight: 600;
+}
+
+.navBadge {
+  position: absolute;
+  top: -5px;
+  right: -9px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-danger);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 17px;
+  text-align: center;
+}
+
+.divider {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: var(--eh-border-default);
+}
+
+.accordion {
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+  overflow: hidden;
+}
+
+.accordionHead {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-sm);
+  width: 100%;
+  min-height: var(--eh-tap-min);
+  padding: var(--eh-space-sm) var(--eh-space-md);
+  border: 0;
+  background: none;
+  color: inherit;
+  font: var(--eh-text-label);
+  font-weight: 600;
+  letter-spacing: normal;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accordionBody {
+  padding: 0 var(--eh-space-md) var(--eh-space-md);
+  font: var(--eh-text-body);
+  letter-spacing: normal;
+  color: var(--eh-text-secondary);
+}
+
+/* ===== Feedback ========================================================== */
+
+.alert {
+  display: flex;
+  gap: var(--eh-space-sm);
+  padding: var(--eh-space-sm) var(--eh-space-md);
+  border-radius: var(--eh-radius-sm);
+  font: var(--eh-text-body);
+  letter-spacing: normal;
+}
+
+.alertInfo {
+  composes: alert;
+  background: var(--eh-tint-brand);
+  color: var(--eh-on-brand-tint);
+}
+
+.alertSuccess {
+  composes: alert;
+  background: var(--eh-success-light);
+  color: var(--eh-on-success);
+}
+
+.alertWarning {
+  composes: alert;
+  background: var(--eh-warning-light);
+  color: var(--eh-on-warning);
+}
+
+.alertDanger {
+  composes: alert;
+  background: var(--eh-danger-light);
+  color: var(--eh-on-danger);
+}
+
+.alertTitle {
+  display: block;
+  font-weight: 700;
+}
+
+/* Toast — ink, because it reports something that already happened. */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-sm);
+  padding: var(--eh-space-sm) var(--eh-space-md);
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-bg-inverse);
+  color: var(--eh-text-inverse);
+  font: var(--eh-text-label);
+  letter-spacing: normal;
+  box-shadow: var(--eh-shadow-card);
+}
+
+.toastAction {
+  margin-left: auto;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: var(--eh-text-label);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.emptyState {
+  display: grid;
+  justify-items: center;
+  gap: var(--eh-space-xs);
+  padding: var(--eh-space-3xl) var(--eh-space-lg);
+  text-align: center;
+}
+
+.emptyIcon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--eh-space-xs);
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-bg-subtle);
+  color: var(--eh-text-disabled);
+}
+
+.emptyTitle {
+  margin: 0;
+  font: var(--eh-text-title);
+  font-family: var(--eh-font-display);
+  font-variation-settings: "wdth" var(--eh-width-title);
+}
+
+.emptyCopy {
+  margin: 0;
+  max-width: 30ch;
+  font: var(--eh-text-body);
+  letter-spacing: normal;
+  color: var(--eh-text-secondary);
+}
+
+.skeleton {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--eh-bg-subtle) 25%,
+    var(--eh-neutral-200) 37%,
+    var(--eh-bg-subtle) 63%
+  );
+  background-size: 400% 100%;
+  animation: ehShimmer 1.4s ease infinite;
+}
+
+@keyframes ehShimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+/* Sheet — the mobile modal. Rises from the bottom edge, and keeps a grabber
+   because a sheet that cannot obviously be dismissed traps people. */
+.sheetScrim {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  background: var(--eh-bg-scrim);
+}
+
+.sheet {
+  width: 100%;
+  padding: var(--eh-space-sm) var(--eh-gutter) var(--eh-space-lg);
+  border-radius: var(--eh-radius-lg) var(--eh-radius-lg) 0 0;
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-sheet);
+}
+
+.sheetGrabber {
+  width: 36px;
+  height: 4px;
+  margin: 0 auto var(--eh-space-md);
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-neutral-300);
+}
+
+.sheetTitle {
+  margin: 0 0 var(--eh-space-xs);
+  font: var(--eh-text-title);
+  font-family: var(--eh-font-display);
+  font-variation-settings: "wdth" var(--eh-width-title);
+}
+
+.dialog {
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+  padding: var(--eh-space-lg);
+  border-radius: var(--eh-radius-lg);
+  background: var(--eh-bg-surface);
+  text-align: center;
+}
+
+.dialogScrim {
+  composes: sheetScrim;
+  align-items: center;
+  padding: var(--eh-gutter);
+}
+
+.progressRing {
+  transform: rotate(-90deg);
+}
+
+/* ===== Display =========================================================== */
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-purple-400);
+  color: #fff;
+  font: var(--eh-text-label);
+  font-weight: 700;
+}
+
+.avatarRing {
+  composes: avatar;
+  box-shadow: 0 0 0 2px var(--eh-bg-surface), 0 0 0 4px var(--eh-eh-purple);
+}
+
+.countBadge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--eh-radius-full);
+  background: var(--eh-danger);
+  color: #fff;
+  font: var(--eh-text-caption);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.statGroup {
+  display: grid;
+  grid-auto-flow: column;
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+  overflow: hidden;
+}
+
+.statCell {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: var(--eh-space-md) var(--eh-space-xs);
+  border-right: 1px solid var(--eh-border-default);
+}
+
+.statCell:last-child {
+  border-right: 0;
+}
+
+.statValue {
+  font: var(--eh-text-body-lg);
+  font-weight: 700;
+}
+
+.statLabel {
+  font: var(--eh-text-caption);
+  font-size: 10.5px;
+  color: var(--eh-text-secondary);
+  text-align: center;
+}
+
+/* Order card — history. Code, contents, money and state in one glance. */
+.orderCard {
+  display: grid;
+  gap: var(--eh-space-sm);
+  padding: var(--eh-space-md);
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+}
+
+.orderTop {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--eh-space-sm);
+}
+
+.orderThumb {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: var(--eh-radius-sm);
+  object-fit: cover;
+  background: var(--eh-bg-subtle);
+}
+
+.orderCode {
+  font: var(--eh-text-label);
+  font-weight: 700;
+}
+
+.orderMeta {
+  display: block;
+  margin-top: 2px;
+  font: var(--eh-text-caption);
+  color: var(--eh-text-secondary);
+}
+
+.orderFoot {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-xs);
+  padding-top: var(--eh-space-sm);
+  border-top: 1px solid var(--eh-border-default);
+  font: var(--eh-text-caption);
+  color: var(--eh-text-secondary);
+}
+
+/* Store card — photo, name, distance and whether it is open right now. */
+.storeCard {
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+  overflow: hidden;
+}
+
+.storePhoto {
+  display: block;
+  width: 100%;
+  height: 116px;
+  object-fit: cover;
+  background: var(--eh-bg-subtle);
+}
+
+.storeCardMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-xs);
+  padding: var(--eh-space-sm) var(--eh-space-md);
+}
+
+/* Reward card — a product you buy with points rather than money. */
+.rewardCard {
+  width: 156px;
+  flex: none;
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+  overflow: hidden;
+}
+
+.rewardMedia {
+  position: relative;
+  height: 96px;
+  background: var(--eh-purple-500);
+  color: #fff;
+  padding: var(--eh-space-sm);
+  font: var(--eh-text-caption);
+}
+
+.rewardCost {
+  position: absolute;
+  right: var(--eh-space-xs);
+  bottom: var(--eh-space-xs);
+  padding: 3px 9px;
+  border-radius: var(--eh-radius-full);
+  background: #fff;
+  color: var(--eh-purple-700);
+  font: var(--eh-text-caption);
+  font-weight: 700;
+}
+
+.rewardName {
+  padding: var(--eh-space-sm);
+  font: var(--eh-text-label);
+  font-weight: 600;
+}
+
+/* Price, with the pre-discount figure kept visible. */
+.price {
+  font: var(--eh-text-label);
+  font-weight: 700;
+  color: var(--eh-text-brand);
+}
+
+.priceWas {
+  margin-left: 6px;
+  font-weight: 400;
+  color: var(--eh-text-disabled);
+  text-decoration: line-through;
+}
+
+.payMethod {
+  display: flex;
+  align-items: center;
+  gap: var(--eh-space-sm);
+  padding: var(--eh-space-sm) var(--eh-space-md);
+  border-radius: var(--eh-radius-md);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+}
+
+.payLogo {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 10px;
+  background: #ae2070;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* QR pass */
+.qrPass {
+  display: grid;
+  justify-items: center;
+  gap: var(--eh-space-sm);
+  padding: var(--eh-space-lg);
+  border-radius: var(--eh-radius-lg);
+  background: var(--eh-bg-surface);
+  box-shadow: var(--eh-shadow-card);
+  text-align: center;
+}
+
+.qrFallback {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  width: 100%;
+  padding: var(--eh-space-sm);
+  border: 1px dashed var(--eh-border-strong);
+  border-radius: var(--eh-radius-sm);
+}
+
+.qrFallbackLabel {
+  font: var(--eh-text-eyebrow);
+  font-family: var(--eh-font-mono);
+  letter-spacing: var(--eh-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--eh-text-secondary);
+}
+
+.qrFallbackCode {
+  font: var(--eh-text-title);
+  font-family: var(--eh-font-mono);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.refreshButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: var(--eh-tap-min);
+  border: 0;
+  background: none;
+  font: var(--eh-text-label);
+  font-weight: 600;
+  letter-spacing: normal;
+  color: var(--eh-text-brand);
+  cursor: pointer;
+}
+
+/* Drawn media placeholders. Sized by whatever slot they fill. */
+.placeholder {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

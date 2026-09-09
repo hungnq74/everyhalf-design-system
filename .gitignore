@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+.env*
+
+# Confidential source material — kept locally, never pushed.
+# The brand guideline PDF is stamped "HIGHLY CONFIDENTIAL"; the reference
+# screenshots contain a real member's face, points balance and order codes.
+docs/EH_Guideline_Color&Typo.pdf
+docs/reference/

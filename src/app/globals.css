@@ -1,0 +1,35 @@
+/* The only global styles this project has. Everything else is a CSS module,
+   and every value comes from the token layer in src/components/tokens.ts. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100svh;
+  background: var(--eh-bg-canvas);
+  color: var(--eh-text-primary);
+  font-family: var(--eh-font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
