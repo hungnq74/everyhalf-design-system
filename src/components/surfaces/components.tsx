@@ -2,6 +2,7 @@
 
 import { Canvas, Hero } from "../workbench/chrome";
 import { Section } from "../workbench/shell";
+import styles from "../workbench/workbench.module.css";
 import { ActionsSection } from "./sections-actions";
 import { CommerceSection } from "./sections-commerce";
 import { DisplaySection } from "./sections-display";
@@ -76,22 +77,9 @@ export function ComponentsSurface() {
         }
       />
 
-      <nav
-        aria-label="Sections"
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 12,
-          marginTop: -16,
-          font: "var(--eh-text-caption)",
-        }}
-      >
+      <nav className={styles.sectionNav} aria-label="Sections">
         {SECTIONS.map((section) => (
-          <a
-            key={section.id}
-            href={`#${section.id}`}
-            style={{ color: "var(--eh-text-brand)", textDecoration: "none", fontWeight: 600 }}
-          >
+          <a key={section.id} className={styles.sectionNavLink} href={`#${section.id}`}>
             {section.index} · {section.title}
           </a>
         ))}

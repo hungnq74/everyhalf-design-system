@@ -160,6 +160,31 @@
   font-size: 0.86em;
 }
 
+/* The jump-links under the hero. Padded to clear the 24px minimum target size:
+   they are a standalone nav row, not links inline in a sentence. */
+.sectionNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eh-space-2xs) var(--eh-space-sm);
+  margin-top: calc(var(--eh-space-lg) * -1);
+}
+
+.sectionNavLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 var(--eh-space-2xs);
+  border-radius: var(--eh-radius-xs);
+  font: var(--eh-text-caption);
+  font-weight: 600;
+  color: var(--eh-text-brand);
+  text-decoration: none;
+}
+
+.sectionNavLink:hover {
+  background: var(--eh-tint-brand);
+}
+
 /* ===== Section / Group / Spec ============================================ */
 
 .section {
@@ -430,13 +455,36 @@
   gap: 2px;
 }
 
+/* Fluid columns, not fixed. The previous 56px + 200px + 190px + 1fr could not
+   shrink below ~500px, so the whole page scrolled sideways on a narrow window. */
 .tokenRow {
   display: grid;
-  grid-template-columns: 56px 200px 190px 1fr;
+  grid-template-columns: 44px minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1.8fr);
   align-items: center;
   gap: var(--eh-space-sm);
   padding: 9px var(--eh-space-sm);
   border-radius: 6px;
+}
+
+/* Same row without the colour chip — the mobile and motion token tables. */
+.tokenRowPlain {
+  composes: tokenRow;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 2fr);
+}
+
+.tokenRowMotion {
+  composes: tokenRow;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.6fr) minmax(0, 1.4fr) minmax(0, 1.6fr);
+}
+
+/* Below this the columns are too narrow to read; stack them. */
+@media (max-width: 640px) {
+  .tokenRow,
+  .tokenRowPlain,
+  .tokenRowMotion {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2px;
+  }
 }
 
 .tokenRow:nth-child(odd) {
@@ -444,9 +492,19 @@
 }
 
 .tokenChip {
+  /* Explicit width: in the grid the track supplied it, but once the row stacks
+     the chip stretched the full width and read as an empty input. */
+  width: 44px;
   height: 26px;
   border-radius: 5px;
   border: 1px solid rgba(35, 31, 32, 0.08);
+}
+
+.tokenRow strong,
+.tokenRow code,
+.tokenRow small {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .tokenRow strong {
@@ -506,7 +564,9 @@
 
 .axisRow {
   display: grid;
-  grid-template-columns: 92px 1fr;
+  /* minmax(0,…) so the nowrap specimen cannot push the track — and the page —
+     wider than the viewport. */
+  grid-template-columns: 92px minmax(0, 1fr);
   align-items: baseline;
   gap: var(--eh-space-md);
   padding-bottom: var(--eh-space-sm);
@@ -519,7 +579,10 @@
   color: var(--eh-text-secondary);
 }
 
+/* A type specimen has to stay at size to be legible, so it scrolls inside its
+   own row rather than being wrapped or shrunk away. */
 .axisSample {
+  overflow-x: auto;
   font-family: var(--eh-font-display);
   font-size: 34px;
   line-height: 1.05;

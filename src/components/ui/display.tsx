@@ -84,18 +84,7 @@ export function OrderCard({
       </div>
       <div className={styles.orderFoot}>
         <span style={{ flex: 1 }}>Pickup tại {store}</span>
-        <button
-          type="button"
-          style={{
-            border: 0,
-            background: "none",
-            font: "var(--eh-text-caption)",
-            fontWeight: 600,
-            color: "var(--eh-text-brand)",
-            cursor: "pointer",
-          }}
-          onClick={onReorder}
-        >
+        <button type="button" className={styles.orderAction} onClick={onReorder}>
           Đặt lại
         </button>
       </div>

@@ -39,6 +39,31 @@ const originLabel: Record<Origin, string> = {
   product: "product",
 };
 
+/**
+ * Ink or white, whichever contrasts better with the swatch underneath.
+ *
+ * These labels sit on fixed hex values rather than on a themed surface, so they
+ * cannot inherit a text colour: in dark mode the inherited near-white landed on
+ * the pale `light` swatch at 1.01:1 and vanished.
+ */
+function readableOn(hex: string): string {
+  const n = Number.parseInt(hex.slice(1), 16);
+  const channel = (v: number) => {
+    const c = v / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  };
+  const l =
+    0.2126 * channel((n >> 16) & 255) +
+    0.7152 * channel((n >> 8) & 255) +
+    0.0722 * channel(n & 255);
+  const onWhite = 1.05 / (l + 0.05);
+  const onInk = (l + 0.05) / (L_INK + 0.05);
+  return onInk >= onWhite ? "#231F20" : "#FFFFFF";
+}
+
+/** Relative luminance of Pure Black #231F20. */
+const L_INK = 0.0144;
+
 function Ramp({ swatches, prefix }: { swatches: Swatch[]; prefix?: string }) {
   return (
     <div className={styles.ramp}>
@@ -148,9 +173,15 @@ export function FoundationSurface() {
                   <span>{entry.role}</span>
                 </div>
                 <div className={styles.semanticBar}>
-                  <span style={{ background: entry.light }}>light</span>
-                  <span style={{ background: entry.default, color: "#fff" }}>base</span>
-                  <span style={{ background: entry.dark, color: "#fff" }}>dark</span>
+                  <span style={{ background: entry.light, color: readableOn(entry.light) }}>
+                    light
+                  </span>
+                  <span style={{ background: entry.default, color: readableOn(entry.default) }}>
+                    base
+                  </span>
+                  <span style={{ background: entry.dark, color: readableOn(entry.dark) }}>
+                    dark
+                  </span>
                 </div>
                 <div className={styles.semanticValues}>
                   <code>{entry.light}</code>
@@ -333,9 +364,8 @@ export function FoundationSurface() {
           <div className={styles.tokenList}>
             {mobile.map((token) => (
               <div
-                className={styles.tokenRow}
+                className={styles.tokenRowPlain}
                 key={token.token}
-                style={{ gridTemplateColumns: "200px 220px 1fr" }}
               >
                 <strong>--eh-{token.token}</strong>
                 <code>{token.value}</code>
@@ -353,9 +383,8 @@ export function FoundationSurface() {
           <div className={styles.tokenList}>
             {motion.map((token) => (
               <div
-                className={styles.tokenRow}
+                className={styles.tokenRowMotion}
                 key={token.token}
-                style={{ gridTemplateColumns: "160px 110px 250px 1fr" }}
               >
                 <strong>--eh-motion-{token.token}</strong>
                 <code>{token.value}</code>

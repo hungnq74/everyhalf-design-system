@@ -92,7 +92,9 @@
   composes: chip;
   border-color: var(--eh-border-default);
   background: var(--eh-bg-subtle);
-  color: var(--eh-text-disabled);
+  /* Disabled controls are exempt from AA, but text-disabled on bg-subtle is
+     1.89:1 — unreadable rather than merely quiet. */
+  color: var(--eh-neutral-500);
   cursor: not-allowed;
 }
 
@@ -382,9 +384,12 @@
   display: inline-flex;
   align-items: center;
   gap: 2px;
+  /* Text actions still have to clear the touch minimum — the system documents
+     44pt for every control, and these are components, not page chrome. */
+  min-height: var(--eh-tap-min);
   border: 0;
   background: none;
-  padding: 0;
+  padding: 0 var(--eh-space-2xs);
   font: var(--eh-text-caption);
   font-weight: 600;
   color: var(--eh-text-brand);
@@ -515,7 +520,9 @@
   gap: 6px;
   padding: 7px 14px;
   border-radius: var(--eh-radius-full);
-  background: linear-gradient(180deg, var(--eh-gold-500), var(--eh-gold-700));
+  /* White on gold-500 is 2.25:1. The gradient starts at gold-700 instead so the
+     app's light-on-gold badge still passes AA (4.88:1 at the lightest point). */
+  background: linear-gradient(180deg, var(--eh-gold-700), #6E5620);
   color: #fff;
   font: var(--eh-text-caption);
   font-weight: 700;
@@ -615,7 +622,8 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  margin-top: var(--eh-space-xs);
+  min-height: var(--eh-tap-min);
+  padding: 0 var(--eh-space-xs);
   border: 0;
   background: none;
   font: var(--eh-text-caption);
@@ -754,6 +762,10 @@
 }
 
 .storeChange {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--eh-tap-min);
+  padding: 0 var(--eh-space-2xs);
   margin-left: auto;
   border: 0;
   background: none;
@@ -997,7 +1009,9 @@
 .buttonDanger {
   composes: button;
   background: var(--eh-danger-light);
-  color: var(--eh-danger-dark);
+  /* on-danger, not danger-dark: the tint flips in dark mode but danger-dark
+     does not, which left dark red on a dark tint at 1.89:1. */
+  color: var(--eh-on-danger);
 }
 
 .buttonSmall {
@@ -1275,7 +1289,9 @@
 
 .navTabOn {
   composes: navTab;
-  color: var(--eh-eh-purple);
+  /* text-brand rather than raw EH Purple: #7864BE on a dark surface is 3.38:1,
+     and this label is 11px. */
+  color: var(--eh-text-brand);
   font-weight: 600;
 }
 
@@ -1388,6 +1404,10 @@
 }
 
 .toastAction {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--eh-tap-min);
+  padding: 0 var(--eh-space-2xs);
   margin-left: auto;
   border: 0;
   background: none;
@@ -1525,7 +1545,8 @@
   height: 44px;
   flex: none;
   border-radius: var(--eh-radius-full);
-  background: var(--eh-purple-400);
+  /* purple-400 put the initials at 2.83:1; EH Purple clears AA at 4.81:1. */
+  background: var(--eh-eh-purple);
   color: #fff;
   font: var(--eh-text-label);
   font-weight: 700;
@@ -1620,6 +1641,20 @@
   color: var(--eh-text-secondary);
 }
 
+.orderAction {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--eh-tap-min);
+  padding: 0 var(--eh-space-2xs);
+  border: 0;
+  background: none;
+  font: var(--eh-text-caption);
+  font-weight: 600;
+  letter-spacing: normal;
+  color: var(--eh-text-brand);
+  cursor: pointer;
+}
+
 .orderFoot {
   display: flex;
   align-items: center;
@@ -1700,7 +1735,9 @@
 .priceWas {
   margin-left: 6px;
   font-weight: 400;
-  color: var(--eh-text-disabled);
+  /* The strikethrough already de-emphasises this; the disabled grey took it to
+     2.13:1, which is unreadable for a number the customer is meant to compare. */
+  color: var(--eh-text-secondary);
   text-decoration: line-through;
 }
 
